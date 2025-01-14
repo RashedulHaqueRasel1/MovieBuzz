@@ -1,7 +1,10 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BsArrowRight } from "react-icons/bs";
 import { FaDownload } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -33,13 +36,49 @@ const Navbar = () => {
 
 
 
-    const NavLink = <>
-        <a to={'/'} className="text-[#00233F] text-xl font-semibold hover:text-[#005397]">Home</a>
-        <a to={'/about'} className="text-[#00233F] text-xl font-semibold hover:text-[#005397]">About</a>
-        <a to={'/skill'} className="text-[#00233F] text-xl font-semibold hover:text-[#005397]">Skill</a>
-        <a to={'/project'} className="text-[#00233F] text-xl font-semibold hover:text-[#005397]">Project</a>
-        <a to={'/Contact'} className="text-[#00233F] text-xl font-semibold hover:text-[#005397]">Contact</a>
-    </>
+    const NavLink =
+        <>
+
+            <Link href={"/"} className="text-[#00233F] text-lg md:text-xl font-semibold hover:text-[#005397] cursor-pointer">
+                Home
+            </Link>
+
+
+            <div className="relative">
+            <button className="peer flex items-center text-[#00233F] text-lg md:text-xl font-semibold hover:text-[#005397] cursor-pointer">
+                Movie <IoIosArrowDown className="mt-1 text-2xl ml-1" />
+            </button>
+
+            <ul className="absolute hidden peer-hover:flex hover:flex flex-col gap-[7px] w-64 md:w-80 lg:w-60 bg-white p-3 shadow-lg rounded-md text-[#424242] z-10 mt-2">
+                <li>
+                    <Link
+                        to="/upcoming"
+                        className="flex items-center gap-[7px] hover:text-[#3B9DF8] transition-all duration-300 cursor-pointer"
+                    >
+                        <BsArrowRight className="text-[#424242] text-sm md:text-[0.9rem]" /> Upcoming Movies
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to="/trending"
+                        className="flex items-center gap-[7px] hover:text-[#3B9DF8] transition-all duration-300 cursor-pointer"
+                    >
+                        <BsArrowRight className="text-[#424242] text-sm md:text-[0.9rem]" /> Trending Movie
+                    </Link>
+                </li>
+            </ul>
+        </div>
+
+            <Link href={"/"} className="text-[#00233F] text-lg md:text-xl font-semibold hover:text-[#005397] cursor-pointer">
+                TV Show
+            </Link>
+            <Link href={"/"} className="text-[#00233F] text-lg md:text-xl font-semibold hover:text-[#005397] cursor-pointer">
+                Pricing
+            </Link>
+            <Link href={"/"} className="text-[#00233F] text-lg md:text-xl font-semibold hover:text-[#005397] cursor-pointer">
+                Contact
+            </Link>
+        </>
 
     return (
         <div>
@@ -88,25 +127,14 @@ const Navbar = () => {
 
 
 
-            {/* Mobile Menu - Slide-in from Left */}
-
-            {/*  mobile view */}
-            {isSidebarOpen && (
-                <div
-                    className="fixed inset-0 bg-black opacity-25 md:hidden"
-                    onClick={toggleSidebar}
-                ></div>
-            )}
-
-
             <div
-                className={`${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"
                     } fixed inset-0 bg-black bg-opacity-50 md:hidden transition-all duration-300 z-50`}
 
             >
 
                 <div
-                    className={`${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    className={`${isSidebarOpen ? "translate-x-32" : "translate-x-0"
                         } fixed left-0 top-0 w-3/4 h-full bg-white shadow-lg p-6 transition-transform duration-300 z-50`}
                 >
                     {/*  */}
@@ -117,10 +145,6 @@ const Navbar = () => {
                     <div className="flex flex-col gap-4 mt-8">
 
                         {NavLink}
-
-                        <button className="px-4 py-2 md:px-6 md:py-3 lg:px-6 lg:py-3  border-2 text-[12px] md:text-[14px] lg:text-[16px] font-bold rounded-lg bg-blue-500 hover:bg-transparent text-black hover:text-black transition duration-1000 ease-in-out flex justify-center items-center">
-                            Download CV <FaDownload className='ml-2' />
-                        </button>
 
                     </div>
                 </div>
